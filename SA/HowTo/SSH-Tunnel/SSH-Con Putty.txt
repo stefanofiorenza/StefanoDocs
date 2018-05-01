@@ -1,0 +1,18 @@
+
+1) Creare una sessione SSH col Host SSH server (auth, key)
+2) Creare un Tunnel:
+2.1) Porta: <porta su cui putty ascoltera per inoltrare>
+2.2) Destination: <server a cui putty indirizzera' la richiesta locale> (Server raggiungibile da Host SSH in sessione)
+
+
+ESEMPIO:
+
+1)Avvio Putty aprendo la Session
+Putty ascolta su 3306
+
+Quello che viene inviato a localhost:3306 pUTTY:
+2) Lo inoltra al server in session Host SSH Es. 10.200.35.125 (dove ho connessione auth con ssh)
+3) Il server SSH lo inoltra alla destination configurata nel TUnnel (Es DB su 10.200.35.124) Purche' raggiungibile da SSH HOst.
+4) I dati viaggiano in entrambe le direzioni.
+
+Per cui da questo momento se mi collego (spegnendo Mysql Locale) a localhost:3306 con Putty acceso e connesso a SSH Host, in realta i dati li mando a .124)
