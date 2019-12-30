@@ -1,0 +1,28 @@
+
+
+
+
+org.springframework.security.config.http.DefaultFilterChainValidator.validate
+	FilterChainProxy.getFilters
+	
+	
+
+Filtro dove e' collegato l uri di default. /login POST con il filter
+UsernamePasswordAuthenticationFilter
+
+
+Configurazione e oggetti:
+
+LoginUrlAuthenticationEntryPoint
+configurazione pagina login da usare
+
+
+DefaultLoginPageGeneratingFilter: dove viene impostato/sovrascritto default processing path per autenticazione
+
+_csrf e' abilitata di default!!! (ed il csrf filter che fallisce per mancanza token
+Risolto.
+Domani studiare come usare il csrf ed a cosa serve
+
+PROBLEMA AVUTO E' CHE:
+1) URI PERFORM (era probabilmente corretto da subito) Verificare come cambiare i path mettendo il progetto al sicuro
+2) Il csrf abilitato di default faceva fallire la validazione (senza dare granche di info come log)

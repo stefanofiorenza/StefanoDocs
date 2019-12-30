@@ -1,0 +1,23 @@
+org.springframework.security.authentication.DefaultAuthenticationEventPublisher:
+ Ha una map di Exception = event
+[null, null, 
+
+org.springframework.security.authentication.BadCredentialsException=public org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+org.springframework.security.core.userdetails.UsernameNotFoundException=public org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+null, null, null, 
+
+org.springframework.security.authentication.ProviderNotFoundException=public org.springframework.security.authentication.event.AuthenticationFailureProviderNotFoundEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+org.springframework.security.authentication.LockedException=public org.springframework.security.authentication.event.AuthenticationFailureLockedEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+org.springframework.security.authentication.DisabledException=public org.springframework.security.authentication.event.AuthenticationFailureDisabledEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+null, null, null, 
+
+org.springframework.security.authentication.CredentialsExpiredException=public org.springframework.security.authentication.event.AuthenticationFailureCredentialsExpiredEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException), 
+
+null, 
+
+org.springframework.security.authentication.AccountExpiredException=public org.springframework.security.authentication.event.AuthenticationFailureExpiredEvent (org.springframework.security.core.Authentication,org.springframework.security.core.AuthenticationException)]

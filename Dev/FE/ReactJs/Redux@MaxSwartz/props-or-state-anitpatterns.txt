@@ -1,0 +1,15 @@
+
+
+separating state from props is to be clear about what data your component owns, and what it does not. 
+If the value of your state depends on the value of a prop, then your state is attempting to serve two masters. 
+When something happens, you can no longer see change and reason why an update to the component happened. 
+
+For instance, someone using your component might be confused why their updated props aren't being respected. 
+Your component might receive update requests without knowing why.
+
+Two of the many possibilities to solving this in react are:
+
+1) Cede control of that state to the component providing the props. Instead, just let the object controlling that prop decide how best to handle it.
+
+2) Change your props to a be just be an initial value, and fully manage the state internally in the component. 
+So 'name' becomes 'initialName', but after that only the component's mutations of that value are respected. Then when you're ready to submit, submit the whole form.

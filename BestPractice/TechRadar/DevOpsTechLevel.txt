@@ -1,0 +1,8 @@
+
+
+
+Configuration Management tools:
+
+	https://www.edureka.co/blog/chef-vs-puppet-vs-ansible-vs-saltstack/
+	https://www.upguard.com/articles/ansible-vs-chef
+	https://www.simplilearn.com/ansible-vs-chef-differences-article

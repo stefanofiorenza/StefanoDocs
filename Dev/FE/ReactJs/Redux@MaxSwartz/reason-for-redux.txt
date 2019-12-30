@@ -1,0 +1,41 @@
+Problem: Common state between pages
+
+App Quiz:
+	Questions
+	Answers
+
+Architecture:
+
+	SPA:
+	State on Server (Backend)
+	State on Client.
+	
+	On Client: When data displayed are changing? Who else can change them?
+	If they come from DB they need to be reloaded every time (some other user might update them in meanwhile)
+	If they are local to user (ex. Quiz) nobody can change them for him, and they need to be mantained on client side (localStorage)
+
+App Crud Products: (action on 1st product from list)
+	Pages handle as state same data (array of products)
+	
+	Issues to solve:
+	
+	1) Pages:
+		input fields onChange need state. 
+		Updated values should reflect on common array.
+		
+	2) where to manage state? (props to state is anti pattern)
+		props are supposed to be read only.
+		They are used to pass data from parent to children components.
+		Parent is only supposed to change children props through its own state.
+	
+	
+	S1) Solution:
+		Manage common data in a parent component.
+		All pages will be children of parent component.
+		Parent component 
+		S1.1) keeps state, and pass it down to children through props.
+		S1.2) change state through its own methods
+		S1.3) pass the methods at (S1.2) to children as event handlers.
+		
+		Problem with solution (S1):
+		Very difficult to manage application state in a bigger application with many pages, many object in the localState tree.

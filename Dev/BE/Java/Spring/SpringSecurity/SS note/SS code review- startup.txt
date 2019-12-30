@@ -1,0 +1,110 @@
+
+Code Review
+
+Configurazione ciclo di vita:
+
+1) org.springframework.web.context.ContextLoader.
+	.initWebApplicationContext: (ContextLoaderListener)
+		.configureAndRefreshWebApplicationContext
+		
+	acquisisce path applicationContext
+	Carica web application context (wac)
+
+2) org.springframework.context.support.XmlWebApplicationContext (eredita da AbstractApplicationContext)
+	.refresh
+		.finishBeanFactoryInitialization (per tutti i non lazy-init beans da configurazione custom)
+		
+
+3) org.springframework.beans.factory.support.DefaultListableBeanFactory
+	.preInstantiateSingletons
+
+
+4) org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean
+	Ogni bean in config viene popolato qui. Breakpoint su 
+			try {
+				final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
+				checkMergedBeanDefinition(mbd, beanName, args);
+	
+	
+SPRING SECURITY:
+4) Per ogni elemento <security:http pattern=""> viene creato un org.springframework.security.web.DefaultSecurityFilterChain
+
+	1) Attributo pattern popola un oggetto AntPathRequestMatcher (RequestMatcher)
+	2) un insieme di filters (da dove, defaults, custom) 
+ 
+ 
+ 
+ 
+ bean name="org.springframework.security.filterChains": lista
+ 
+ 
+ 
+ CLASSI breakpoints:
+ org.springframework.security.filterChains (list di)
+ org.springframework.security.web.context.HttpSessionSecurityContextRepository
+ 
+ 
+ org.springframework.security.core.context.SecurityContextImpl
+	TrustResover: org.springframework.security.authentication.AuthenticationTrustResolverImpl
+ 
+ 
+ AUTH MANAGER:
+	 org.springframework.security.authentication.ProviderManager:
+		org.springframework.security.authentication.AnonymousAuthenticationProvider
+	org.springframework.security.config.authentication.AuthenticationManagerFactoryBean
+
+	
+	org.springframework.security.authentication.dao.DaoAuthenticationProvider:
+		.userDetailService= org.springframework.security.provisioning.InMemoryUserDetailsManager
+	
+	
+	org.springframework.security.filterChains
+		sourceList: 
+		[
+		[ Ant [pattern='/resources/**'], []], 
+		[ Ant [pattern='/tci/auth/login'], []], 
+		[ Ant [pattern='/*'], [org.springframework.security.web.context.SecurityContextPersistenceFilter@2d6fbb23, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a01655e, org.springframework.security.web.header.HeaderWriterFilter@45b26bd4, org.springframework.security.web.authentication.logout.LogoutFilter@6ff3841d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3f958c63, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ecf355a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@18751b9c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6bd5a7e3, org.springframework.security.web.session.SessionManagementFilter@78b0c86e, org.springframework.security.web.access.ExceptionTranslationFilter@4fe257c7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5bb70eff]]]
+	
+	
+	org.springframework.security.userDetailsServiceFactory
+	
+	
+ FILTERS:
+ 
+ org.springframework.security.filterChainProxy
+ 
+ 
+	org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.attemptAuthentication
+ 
+ 
+  CLASSI DA VERIFICARE:
+  
+  org.springframework.security.web.access.intercept.FilterSecurityInterceptor  
+  org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator
+  
+ org.springframework.security.authentication.DefaultAuthenticationEventPublisher  
+ org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy
+ org.springframework.security.web.PortResolverImpl
+ org.springframework.security.web.PortMapperImp
+ 
+ 
+ org.springframework.security.securityContextSource =LDAP
+ 
+ 
+ org.springframework.security.web.savedrequest.HttpSessionRequestCache
+ 
+ org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
+ 
+ 
+ 
+ FILTRI:
+ org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+ 
+ 
+ FilterInvocationSecurityMetadataSourceParser
+ 
+ 
+ 
+ CUSTOMIZZAZIONE:
+ 
+ LoginUrlAuthenticationEntryPoint
